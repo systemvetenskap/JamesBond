@@ -27,6 +27,7 @@ namespace JamesBond
             string name = "Eva Ek";
             string agentName = Bondifier(name);
 
+
             /*
              * Nu vill vi ta reda på om en person är vän eller fiende
              * friend or foo
@@ -44,6 +45,9 @@ namespace JamesBond
              * */
 
             bool isEnemy = IsFoo(name);
+            isEnemy = IsFoo("Erik Öberg", 'k', 'e');
+            isEnemy = IsFoo("Foley Bond", 'f', 'o');
+
         }
         /// <summary>
         /// Ta reda på om en person är vän eller fiende.
@@ -53,12 +57,46 @@ namespace JamesBond
         /// <param name="name">namnet</param>
         /// <returns>true om personen är fiende
         /// false om personen inte är fiende</returns>
+        private bool IsFoo(string name, char firstLetter, char secondLetter)
+        {
+            /* 
+             * loopa igenom namnet och räkna bokstäverna som matchar
+             * regler första bokstaven minst en gång
+             * andra bokstaven minst två gånger
+             */
+            //foreach (char letter in name)
+
+            int countFirstLetter = 0;
+            int countSecondLetter = 0;
+            //char firstLetter = 'f';
+            //char secondLetter = 'o';
+
+            // antar att max är 150
+
+            name = name.ToLower();
+            foreach (char letter in name)
+            {
+                if (letter.Equals(firstLetter))  // letter == 'f'
+                {
+                    countFirstLetter++;
+                }
+                else if (letter.Equals(secondLetter))
+                {
+                    countSecondLetter++;
+                }
+            }
+            return countFirstLetter >= 1 && countSecondLetter >= 2;
+        }
+        /// <summary>
+        /// Undersöker om en person är vän eller fiende
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private bool IsFoo(string name)
         {
-            name = name.ToLower();
-            // returnera true om det är en person med minst ett f och två o
-
-            return false;
+            char firstLetter = 'f';
+            char secondLetter = 'o';
+            return IsFoo(name, firstLetter, secondLetter);
         }
 
         private string FuskBondifier(string name)
